@@ -17,10 +17,8 @@ export function updateGame(game: GameState): void {
     }
 }
 
-export function validateMove(game: GameState, card1: Card, card2: Card): boolean {
-    if (game.state !== 'playing') {
-        return false;
-    }
+export function processTurn(gameState: GameState, card1: Card, card2: Card): GameState {
+    const newState = {...gameState};
 
     const match: Match = {
         isMatch: checkMatch(card1, card2),
@@ -28,11 +26,15 @@ export function validateMove(game: GameState, card1: Card, card2: Card): boolean
         card2,
     }
 
-    game.guesses.push(match);
+    newState.guesses.push(match);
 
     if (match.isMatch) {
-        game.correctGuesses.push(match);
+        newState.correctGuesses.push(match);
     }
+    
+    return newState;
+}
 
-    return true;
+export function isValidMove(game: GameState): boolean {
+    return game.state === 'playing';
 }
