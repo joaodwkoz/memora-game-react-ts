@@ -1,11 +1,11 @@
 export function generateSeed(date?: Date | null): number { // Função para gerar seed a partir da data UTC.
-    let newDate = date?.toISOString();
-
     if (!date) {
-        newDate = new Date().toISOString().substring(0, 10);
+        date = new Date();
     }
 
-    const formattedDate = newDate?.split('-').join('');
+    let newDate = date?.toISOString();
+
+    const formattedDate = newDate.split('-').join('');
 
     return parseInt(formattedDate);
 }
