@@ -30,7 +30,8 @@ export type Match = {
 
 export type GameState = {
     state: 'playing' | 'won' | 'lost',
-    seed: Seed | null,
+    seed: Seed,
     grid: Card[],
     guesses: Match[],
+    correctGuesses: Match[],
 } 
