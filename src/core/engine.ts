@@ -16,7 +16,7 @@ export function processTurn(gameState: GameState, card1: Card, card2: Card): Gam
         newState.correctGuesses.push(match);
     }
 
-    if (newState.guesses.length > newState.seed.numberOfMoves && newState.seed.numberOfMoves !== -1) {
+    if (newState.guesses.length > newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
         newState.state = 'lost';
     }
 

@@ -1,9 +1,8 @@
-export type CardType = 'animals' | 'fruits' | 'objects' | 'mixed'
+import { DIFFICULTIES, TYPE_OF_CARDS } from "../constants/game";
 
-export type Difficulty = {
-    name: 'Muito Fácil' | 'Fácil' | 'Médio' | 'Difícil' | 'Muito Difícil',
-    color: string,
-}
+export type CardType = typeof TYPE_OF_CARDS[number];
+
+export type Difficulty = typeof DIFFICULTIES[number];
 
 export type Card = {
     type: CardType,
@@ -16,9 +15,9 @@ export type Seed = {
     type: CardType,
     difficulty: Difficulty,
     numberOfCards: number,
-    numberOfMoves: number,
-    time: number,
-    isOvertime: boolean,
+    maxNumberOfMoves: number,
+    maxTime: number,
+    hasOvertime: boolean,
     startGrid: Card[],
 }
 
@@ -31,7 +30,7 @@ export type Match = {
 export type GameState = {
     state: 'playing' | 'won' | 'lost',
     seed: Seed,
-    grid: Card[],
+    currentGrid: Card[],
     guesses: Match[],
     correctGuesses: Match[],
 } 
