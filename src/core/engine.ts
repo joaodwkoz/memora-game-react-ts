@@ -1,19 +1,21 @@
-import type { Card, GameState, Match } from './../types/index';
+import type { GameState, Match, Guess } from './../types/index';
 import { checkMatch } from './check-match';
 
-export function processTurn(gameState: GameState, card1: Card, card2: Card): GameState {
+export function processTurn(gameState: GameState, match: Match): GameState {
     const newState = {...gameState};
 
-    const match: Match = {
-        isMatch: checkMatch(card1, card2),
-        card1,
-        card2,
+    const card1 = match.card1;
+    const card2 = match.card2;
+
+    const newGuess: Guess = {
+        isCorrect: checkMatch(card1, card2),
+        match
     }
 
-    newState.guesses.push(match);
+    newState.guesses.push(newGuess);
 
-    if (match.isMatch) {
-        newState.correctGuesses.push(match);
+    if (newGuess.isCorrect) {
+        newState.correctGuesses.push(newGuess);
     }
 
     if (newState.guesses.length > newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
@@ -27,6 +29,6 @@ export function processTurn(gameState: GameState, card1: Card, card2: Card): Gam
     return newState;
 }
 
-export function isValidMove(game: GameState): boolean {
+export function isValidMove(game: GameState, match: Match): boolean {
     return game.state === 'playing';
 }

@@ -22,15 +22,19 @@ export type Seed = {
 }
 
 export type Match = {
-    isMatch: boolean,
     card1: Card,
     card2: Card,
+}
+
+export type Guess = {
+    isCorrect: boolean,
+    match: Match,
 }
 
 export type GameState = {
     state: 'playing' | 'won' | 'lost',
     seed: Seed,
     currentGrid: Card[],
-    guesses: Match[],
-    correctGuesses: Match[],
+    guesses: Guess[],
+    correctGuesses: Guess[],
 } 
