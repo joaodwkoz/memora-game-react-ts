@@ -1,3 +1,4 @@
+import type { ComponentType, SVGProps } from 'react';
 import { DIFFICULTIES, TYPE_OF_CARDS } from "../constants/game";
 
 export type CardType = typeof TYPE_OF_CARDS[number];
@@ -8,7 +9,7 @@ export type Card = {
     type: CardType,
     state: 'hidden' | 'shown',
     name: string,
-    imageUrl: string,
+    svg: ComponentType<SVGProps<SVGSVGElement>> | null,
 }
 
 export type Seed = {
