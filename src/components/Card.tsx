@@ -2,9 +2,10 @@ import type { Card } from "../types";
 
 interface CardProps extends Card {
   hasOvertimeStyle?: boolean | null;
+  onClick?: () => void,
 }
 
-export function Card({ name, svg, state, hasOvertimeStyle = false }: CardProps) {
+export function Card({ name, svg, state, hasOvertimeStyle = false, onClick }: CardProps) {
     const Icon = svg;
 
     const isShown = state === "shown";
@@ -15,7 +16,7 @@ export function Card({ name, svg, state, hasOvertimeStyle = false }: CardProps) 
     const customClass = `${defaultClasses} ${isShownClass}`
 
     return (
-        <div className="w-24 h-32 perspective-1000">
+        <div className="w-24 h-32 perspective-1000" onClick={onClick}>
             <div className={customClass}>
                 <div className="absolute inset-0 rounded-2xl color-card border-3 border-border-muted flex items-center justify-center backface-hidden p-3 hover:-translate-y-1.5 hover:border-border group">
                     <div className="w-full h-full rounded-lg border-3 border-border-muted flex items-center justify-center group-hover:border-border">

@@ -1,6 +1,7 @@
 import type { GameState, Seed, Card } from "../types";
 import { prng } from "../core/prng";
 import { generateSeed } from "../core/daily-seed";
+import { createGrid } from "../core/create-grid";
 import { DIFFICULTY_BY_SCORE, MAX_NUMBER_OF_MOVES, MAX_TIME_SECONDS, NUMBER_OF_CARDS, TYPE_OF_CARDS } from '../constants/game';
 import { CARDS } from "../constants/cards";
 
@@ -15,10 +16,13 @@ export function useDailySeed(date?: Date | null) {
     }
 
     const randomTypeOfCards = generateRandomNumber(TYPE_OF_CARDS.length);
-    const gameTypeOfCards = TYPE_OF_CARDS[randomTypeOfCards];
+    const gameTypeOfCards = 'animals' // TYPE_OF_CARDS[randomTypeOfCards];
 
     const randomNumberOfCards = generateRandomNumber(NUMBER_OF_CARDS.length);
     const gameNumberOfCards = NUMBER_OF_CARDS[randomNumberOfCards];
+
+    const gameIndividualCards = CARDS[gameTypeOfCards].slice(0, gameNumberOfCards / 2);
+    const gameCards = createGrid(gameIndividualCards);
 
     const generatedMaxNumberOfMoves = MAX_NUMBER_OF_MOVES[gameNumberOfCards];
     const randomMaxNumberOfMoves = generateRandomNumber(generatedMaxNumberOfMoves.length);
@@ -34,17 +38,16 @@ export function useDailySeed(date?: Date | null) {
     const difficultyPoints = gameMaxNumberOfMoves.score + gameMaxNumberOfMoves.score + gameMaxTime.score + (gameHasOvertime ? 5: 0);
     const gameDifficulty = DIFFICULTY_BY_SCORE(difficultyPoints);
 
-    const tempGrid: Card[] = Array(gameNumberOfCards);
-    let numSelectedCards: number = 0;
+    const tempGrid: Card[] = [];
 
-    while (numSelectedCards < gameNumberOfCards) {
-        const randomPositionGrid: number = generateRandomNumber() % gameNumberOfCards;
-        const randomCardIdx: number = generateRandomNumber() % gameNumberOfCards;
+    for (const card of gameCards) {
+        let randomGeneratedIdx = generateRandomNumber(gameNumberOfCards);
 
-        if (!tempGrid[randomPositionGrid]) {
-            tempGrid[randomPositionGrid] = CARDS[gameTypeOfCards][randomCardIdx];
-            numSelectedCards++;
+        while (tempGrid[randomGeneratedIdx]) {
+            randomGeneratedIdx = generateRandomNumber(gameNumberOfCards);
         }
+
+        tempGrid[randomGeneratedIdx] = card;
     }
 
     const gameSeed: Seed = {

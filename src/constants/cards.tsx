@@ -207,6 +207,7 @@ export const CARDS: Record<string, Card[]> = {
         ANIMALS.map(
             (anim) => {
                 return { 
+                    id: 1,
                     type: 'animals',
                     name: anim.name,
                     svg: anim.svg,
@@ -218,6 +219,7 @@ export const CARDS: Record<string, Card[]> = {
         FRUITS.map(
             (fru) => {
                 return { 
+                    id: 1,
                     type: 'fruits',
                     name: fru.name,
                     svg: fru.svg,
@@ -229,6 +231,7 @@ export const CARDS: Record<string, Card[]> = {
         OBJECTS.map(
             (obj) => {
                 return { 
+                    id: 1,
                     type: 'objects',
                     name: obj.name,
                     svg: obj.svg,
@@ -240,6 +243,7 @@ export const CARDS: Record<string, Card[]> = {
         MIXED.map(
             (mix) => {
                 return { 
+                    id: 1,
                     type: 'mixed',
                     name: mix.name,
                     svg: mix.svg,

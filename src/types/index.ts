@@ -6,6 +6,7 @@ export type CardType = typeof TYPE_OF_CARDS[number];
 export type Difficulty = typeof DIFFICULTIES[number];
 
 export type Card = {
+    id: number | string,
     type: CardType,
     state: 'hidden' | 'shown',
     name: string,
@@ -23,8 +24,8 @@ export type Seed = {
 }
 
 export type Match = {
-    card1: Card,
-    card2: Card,
+    card1: Card | null,
+    card2: Card | null,
 }
 
 export type Guess = {
