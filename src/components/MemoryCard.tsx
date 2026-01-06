@@ -1,11 +1,11 @@
 import type { Card } from "../types";
 
-interface CardProps extends Card {
+interface MemoryCardProps extends Card {
   hasOvertimeStyle?: boolean | null;
   onClick?: () => void,
 }
 
-export function Card({ name, svg, state, hasOvertimeStyle = false, onClick }: CardProps) {
+export function MemoryCard({ name, svg, state, hasOvertimeStyle = false, onClick }: MemoryCardProps) {
     const Icon = svg;
 
     const isShown = state === "shown";
