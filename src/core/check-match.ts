@@ -1,5 +1,5 @@
 import type { Card } from "../types";
 
 export function checkMatch(card1: Card, card2: Card): boolean {
-    return card1.name === card2.name;
+    return card1.name === card2.name && card1.id !== card2.id;
 }   
