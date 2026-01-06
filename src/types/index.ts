@@ -34,9 +34,10 @@ export type Guess = {
 }
 
 export type GameState = {
-    state: 'playing' | 'won' | 'lost',
+    state: 'playing' | 'won' | 'lost' | 'guessing',
     seed: Seed,
     currentGrid: Card[],
     guesses: Guess[],
     correctGuesses: Guess[],
+    currentMatch: Match,
 } 

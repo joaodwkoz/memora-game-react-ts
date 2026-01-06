@@ -66,6 +66,10 @@ export function useDailySeed(date?: Date | null) {
         currentGrid: tempGrid,
         guesses: [],
         correctGuesses: [],
+        currentMatch: {
+            card1: null,
+            card2: null,
+        }
     }
 
     return {
