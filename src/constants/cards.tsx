@@ -1,6 +1,7 @@
 import type { ComponentType, SVGProps } from 'react';
 import type { Card } from '../types/index';
 import { BearIcon, CatIcon, ChickenIcon, DogIcon, FishIcon, FoxIcon, GiraffeIcon, HorseIcon, LionIcon, MonkeyIcon, ParrotIcon, PigIcon, RabbitIcon, SharkIcon, WolfIcon } from '../components/icons/animals';
+import { AppleIcon, BananaIcon, CherryIcon, GrapeIcon, LimonIcon, MangoIcon, MelonIcon, OrangeIcon, PeachIcon, PearIcon, PineappleIcon, PlumIcon, RaspberryIcon, StrawberryIcon, WatermelonIcon } from '../components/icons/fruits';
 
 type GameItem = {
     name: string;
@@ -73,63 +74,63 @@ const ANIMALS: GameItem[] = [
 const FRUITS: GameItem[] = [
     {
         name: "Maçã",
-        svg: null,
+        svg: AppleIcon,
     },
     {
         name: "Banana",
-        svg: null,
+        svg: BananaIcon,
     },
     {
         name: "Laranja",
-        svg: null,
+        svg: OrangeIcon,
     },
     {
         name: "Uva",
-        svg: null,
+        svg: GrapeIcon,
     },
     {
         name: "Manga",
-        svg: null,
+        svg: MangoIcon,
     },
     {
         name: "Abacaxi",
-        svg: null,
+        svg: PineappleIcon,
     },
     {
         name: "Morango",
-        svg: null,
+        svg: StrawberryIcon,
     },
     {
         name: "Melancia",
-        svg: null,
+        svg: WatermelonIcon,
     },
     {
         name: "Melão",
-        svg: null,
+        svg: MelonIcon,
     },
     {
         name: "Pera",
-        svg: null,
+        svg: PearIcon,
     },
     {
         name: "Limão",
-        svg: null,
+        svg: LimonIcon,
     },
     {
-        name: "Acerola",
-        svg: null,
+        name: "Framboesa",
+        svg: RaspberryIcon,
     },
     {
         name: "Cereja",
-        svg: null,
+        svg: CherryIcon,
     },
     {
         name: "Pêssego",
-        svg: null,
+        svg: PeachIcon,
     },
     {
         name: "Ameixa",
-        svg: null,
+        svg: PlumIcon,
     },
 ];
 
