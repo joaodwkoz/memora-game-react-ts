@@ -119,7 +119,7 @@ export function Game() {
 
                             <Timer 
                                 startTime={0} 
-                                endTime={90} 
+                                endTime={gameState.seed.maxTime} 
                                 isRunning={gameState.correctGuesses.length !== gameState.currentGrid.length / 2}
                                 onTimeEnd={handleLose} 
                             />

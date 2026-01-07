@@ -44,23 +44,23 @@ export const NUMBER_OF_CARDS: number[] = [
 export const NUMBER_OF_MOVES_MULTIPLIERS: DifficultyParameter[] = [
     {
         value: -1,
-        score: -1.25,
-    },
-    {
-        value: 6.5,
-        score: 1,
+        score: 0,
     },
     {
         value: 5,
-        score: 2.5,
+        score: 2,
     },
     {
         value: 3.75,
-        score: 5,
+        score: 4.25,
     },
     {
         value: 2.5,
-        score: 7.5,
+        score: 6.25,
+    },
+    {
+        value: 1.25,
+        score: 10,
     },
 ];
 
@@ -82,23 +82,23 @@ export const MAX_NUMBER_OF_MOVES = tempMaxMoves;
 export const TIME_MULTIPLIERS: DifficultyParameter[] = [
     {
         value: -1,
-        score: -1.25,
+        score: 0,
     },
     {
-        value: 6.5,
-        score: 1,
+        value: 7.5,
+        score: 2,
     },
     {
         value: 5,
-        score: 2.5,
+        score: 4.25,
     },
     {
-        value: 3.5,
-        score: 5,
+        value: 3.75,
+        score: 6.5,
     },
     {
-        value: 2,
-        score: 7.5,
+        value: 2.5,
+        score: 10,
     },
 ]
 
@@ -120,11 +120,11 @@ export const MAX_TIME_SECONDS = tempMaxTime;
 export const DIFFICULTY_BY_SCORE = (score: number): Difficulty => {
     if (score < 5) {
         return DIFFICULTIES[0];
-    } else if(score >= 5) {
+    } else if(score < 7.5) {
         return DIFFICULTIES[1];
-    } else if(score >= 7.5) {
+    } else if(score < 12.5) {
         return DIFFICULTIES[2];
-    } else if (score >= 10) {
+    } else if (score < 17.5) {
         return DIFFICULTIES[3];
     }
 
