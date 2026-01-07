@@ -10,7 +10,7 @@ export function Button({ size = 'md', variant = 'primary', className, children }
 
     switch (size) {
         case 'custom':
-            sizeClasses = ''; // Precisa ser implementado.
+            sizeClasses = '';
             break;
         case 'sm':
             sizeClasses = 'py-0.5 px-1.5 rounded-sm';
@@ -38,8 +38,8 @@ export function Button({ size = 'md', variant = 'primary', className, children }
         case 'primary':
             variantClasses = 'bg-surface'
             break;
-        case 'muted':
-            variantClasses = 'bg-surface-interactive-muted hover:bg-surface-interactive'
+        case 'interactive':
+            variantClasses = 'bg-surface-interactive'
             break;
         default:
             variantClasses = 'bg-surface'

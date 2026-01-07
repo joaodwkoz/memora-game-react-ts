@@ -1,19 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface TimerProps {
     startTime?: number | null,
     endTime: number,
     showBar?: boolean | null,
     hasOvertime?: boolean | null,
+    isRunning?: boolean | null,
     onTimeEnd?: () => void,
 }
 
-export function Timer({ startTime = 0, endTime, showBar = true, hasOvertime = false }: TimerProps) {
-    const [seconds, setSeconds] = useState<number>(startTime ? startTime : 0);
+export function Timer({ startTime = 0, endTime, showBar = true, hasOvertime = false, isRunning = true, onTimeEnd }: TimerProps) {
+    const [seconds, setSeconds] = useState<number>(startTime!);
 
-    setTimeout(() => {
-        setSeconds(seconds + 1);
-    }, 1000);
+    useEffect(() => {
+        if (!isRunning) return;
+
+        const runningFunction = setTimeout(() => {
+            setSeconds(prev => prev + 1);
+        }, 1000);
+
+        return () => clearTimeout(runningFunction);
+    }, [isRunning, seconds]);
+
+    useEffect(() => {
+        if (seconds === endTime) {
+            onTimeEnd!();
+        }
+    }, [seconds]);
 
     return (
         <div className="flex gap-3 items-center">
