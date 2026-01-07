@@ -53,7 +53,7 @@ export function useGame(date?: Date | null) {
                 setTimeout(() => {
                     const processedState = processTurn(guessingState);
                     setGameState(processedState);
-                }, 2000);
+                }, 1000);
             } else {
                 nextState.currentMatch.card1 = updatedCard;
                 setGameState(nextState);

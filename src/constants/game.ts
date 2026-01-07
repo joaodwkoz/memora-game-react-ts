@@ -36,10 +36,10 @@ export const TYPE_OF_CARDS = [
 ] as const;
 
 export const NUMBER_OF_CARDS: number[] = [
+    12,
     18,
     24,
-    30,
-];
+]; // Trocar para 18, 24, 30 (primeiro tem que arrumar o layout)
 
 export const NUMBER_OF_MOVES_MULTIPLIERS: DifficultyParameter[] = [
     {
