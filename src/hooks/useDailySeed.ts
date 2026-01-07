@@ -16,7 +16,7 @@ export function useDailySeed(date?: Date | null) {
     }
 
     const randomTypeOfCards = generateRandomNumber(TYPE_OF_CARDS.length);
-    const gameTypeOfCards = 'animals' // TYPE_OF_CARDS[randomTypeOfCards];
+    const gameTypeOfCards = 'fruits' // TYPE_OF_CARDS[randomTypeOfCards];
 
     const randomNumberOfCards = generateRandomNumber(NUMBER_OF_CARDS.length);
     const gameNumberOfCards = NUMBER_OF_CARDS[randomNumberOfCards];
@@ -35,7 +35,8 @@ export function useDailySeed(date?: Date | null) {
     const randomHasOvertime = generateRandomNumber(20);
     const gameHasOvertime = randomHasOvertime > 17;
 
-    const difficultyPoints = gameMaxNumberOfMoves.score + gameMaxNumberOfMoves.score + gameMaxTime.score + (gameHasOvertime ? 5: 0);
+    const difficultyPoints = gameMaxNumberOfMoves.score + gameMaxTime.score + (gameHasOvertime ? 5: 0);
+
     const gameDifficulty = DIFFICULTY_BY_SCORE(difficultyPoints);
 
     const tempGrid: Card[] = [];
