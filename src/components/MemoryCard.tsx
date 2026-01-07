@@ -3,7 +3,6 @@ import { motion } from "motion/react";
 import type { Card } from "../types";
 
 interface MemoryCardProps extends Card {
-  hasOvertimeStyle?: boolean | null;
   onClick?: () => void,
 }
 
@@ -13,7 +12,6 @@ export const MemoryCard = (
             name, 
             svg, 
             state, 
-            hasOvertimeStyle = false, 
             onClick 
         }: MemoryCardProps
     ) => {
@@ -103,7 +101,7 @@ export const MemoryCard = (
                             </div>
 
                             <div className="h-10 flex items-center justify-center">
-                                <p className="font-medium text-xs leading-none text-white truncate">
+                                <p className="font-medium text-xs leading-snug text-white truncate">
                                     { name }
                                 </p>
                             </div>
