@@ -15,11 +15,9 @@ export function useGame(date?: Date | null) {
             return;
         }
 
-        const isInACorrectGuess = gameState.correctGuesses.find(
-            (guess) => (guess.match.card1!.id === card.id || guess.match.card2!.id === card.id)
-        );
+        const isOnCurrentMatch = Object.values(gameState.currentMatch).find((c) => c?.id === card.id);
 
-        if (isInACorrectGuess) {
+        if (isOnCurrentMatch || card.state === 'shown') {
             return;
         }
 
@@ -29,7 +27,7 @@ export function useGame(date?: Date | null) {
             if (c.id === card.id) {
                 return { 
                     ...c, 
-                    state: c.state === 'shown' ? 'hidden' : 'shown' 
+                    state: 'shown'
                 };
             }
 
@@ -38,32 +36,21 @@ export function useGame(date?: Date | null) {
 
         const updatedCard = nextState.currentGrid.find((c) => c.id === card.id)!;
 
-        const isNowShowing = updatedCard.state === 'shown';
+        if (nextState.currentMatch.card1) {
+            nextState.currentMatch.card2 = updatedCard;
+            
+            nextState.state = 'guessing';
 
-        if (isNowShowing) {
-            if (nextState.currentMatch.card1) {
-                nextState.currentMatch.card2 = updatedCard;
-                
-                nextState.state = 'guessing';
+            setGameState(nextState);
 
-                setGameState(nextState);
+            const guessingState = {...nextState};
 
-                const guessingState = {...nextState};
-
-                setTimeout(() => {
-                    const processedState = processTurn(guessingState);
-                    setGameState(processedState);
-                }, 1000);
-            } else {
-                nextState.currentMatch.card1 = updatedCard;
-                setGameState(nextState);
-            }
+            setTimeout(() => {
+                const processedState = processTurn(guessingState);
+                setGameState(processedState);
+            }, 1000);
         } else {
-            nextState.currentMatch = {
-                card1: null,
-                card2: null,
-            };
-
+            nextState.currentMatch.card1 = updatedCard;
             setGameState(nextState);
         }
     }
