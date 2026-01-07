@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+import { motion } from "motion/react";
 import { Button } from "../components/Button";
 import { CalendarIcon, Cog6ToothIcon, InformationCircleIcon, ChartBarIcon } from "@heroicons/react/24/solid";
 
@@ -22,7 +24,15 @@ const OPTIONS = [
     },
 ]
 
+const MotionButton = motion.create(Button);
+
 export function Home() {
+    const navigate = useNavigate();
+
+    const goToOtherPage = (page: string) => {
+        navigate(`/${page}`);
+    }
+
     return (
         <div className="w-screen h-screen bg-background">
             <div className="w-full h-full flex items-center justify-center">
@@ -35,7 +45,14 @@ export function Home() {
                         </p>
                     </div>
 
-                    <Button size='custom' variant='custom' className="cursor-pointer w-86 border-2 border-border rounded-lg bg-surface p-3.5 flex items-center justify-between">
+                    <Button
+                        size='custom' 
+                        variant='custom' 
+                        className="cursor-pointer w-86 border-2 border-border rounded-lg bg-surface p-3.5 flex items-center justify-between"
+                        onClick={
+                            () => goToOtherPage('daily')
+                        }
+                    >
                         <div className="flex flex-col gap-2.5">
                             <p className="font-semibold text-base tracking-normal leading-none text-left text-white">
                                 Jogue o desafio diário!
@@ -46,24 +63,39 @@ export function Home() {
                             </p>
                         </div>
 
-                        <div className="w-18 h-8 rounded-sm bg-secondary flex items-center justify-center">
+                        <motion.div 
+                            whileHover={{
+                                y: -3,
+                                transition: { duration: 0.1 }
+                            }}
+                            className="w-18 h-8 rounded-sm bg-secondary flex items-center justify-center"
+                        >
                             <p className="font-medium text-xs tracking-normal leading-none text-white">
                                 Jogar
                             </p>
-                        </div>
+                        </motion.div>
                     </Button>
 
                     <div className="flex flex-col gap-4 items-center">
                         {
                             OPTIONS.map(
-                                (opt) => (
-                                    <Button size="custom" variant="custom" className="w-48 flex items-center gap-3 p-4 rounded-lg hover:bg-surface">
+                                (opt, i) => (
+                                    <MotionButton
+                                        whileHover={{
+                                            backgroundColor: '#19212F',
+                                            transition: { duration: 0.1 }
+                                        }}
+                                        key={i.toString()}
+                                        size="custom" 
+                                        variant="custom" 
+                                        className="w-48 flex items-center gap-3 p-4 rounded-lg"
+                                    >
                                         <opt.lib color="white" className="w-6 h-6" />
 
                                         <p className="font-medium text-base tracking-normal text-white leading-none">
                                             { opt.name }
                                         </p>
-                                    </Button>
+                                    </MotionButton>
                                 ))
                         }
                     </div>
