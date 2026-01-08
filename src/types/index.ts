@@ -6,7 +6,7 @@ export type CardType = typeof TYPE_OF_CARDS[number];
 export type Difficulty = typeof DIFFICULTIES[number];
 
 export type Card = {
-    id: number | string,
+    id: string,
     type: CardType,
     state: 'hidden' | 'shown',
     name: string,
