@@ -121,6 +121,7 @@ export function Game() {
                                 startTime={0} 
                                 endTime={gameState.seed.maxTime} 
                                 isRunning={gameState.correctGuesses.length !== gameState.currentGrid.length / 2}
+                                showBar={gameState.seed.maxTime !== -1}
                                 onTimeEnd={handleLose} 
                             />
                         </div>
