@@ -29,7 +29,7 @@ export function GameStat({ icon, value = 0, maxValue, onReachMaxValue }: GameSta
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                     className="absolute top-0 left-0 w-full text-center"
                 >
-                    {Array.from({ length: maxValue! !== -1 ? maxValue! : 300 }).map(
+                    {Array.from({ length: maxValue! !== -1 ? maxValue! + 1 : 300 }).map(
                         (_, i) => (
                             <div key={i} className="h-6 flex items-center justify-center">
                                 <p className="font-semibold text-2xl tracking-tight text-white leading-none">
