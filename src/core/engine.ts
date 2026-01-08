@@ -29,7 +29,7 @@ export function processTurn(gameState: GameState): GameState {
         newState.correctGuesses.push(newGuess);
     }
 
-    if (newState.guesses.length > newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
+    if (newState.guesses.length >= newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
         newState.state = 'lost';
     } else if (newState.correctGuesses.length >= newState.seed.numberOfCards / 2) {
         newState.state = 'won';
