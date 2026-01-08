@@ -51,8 +51,12 @@ export function useDailySeed(date?: Date | null) {
     const randomMaxTime = generateRandomNumber(generatedMaxTimeSeconds.length);
     const gameMaxTime = generatedMaxTimeSeconds[randomMaxTime];
 
-    const randomHasOvertime = generateRandomNumber(20);
-    const gameHasOvertime = randomHasOvertime > 17;
+    let gameHasOvertime = false;
+
+    if (gameMaxNumberOfMoves.value !== -1 || gameMaxTime.value !== -1) {
+        const randomHasOvertime = generateRandomNumber(20);
+        gameHasOvertime = randomHasOvertime > 17;
+    }
 
     const difficultyPoints = gameMaxNumberOfMoves.score + gameMaxTime.score + (gameHasOvertime ? 5: 0);
 
@@ -79,6 +83,8 @@ export function useDailySeed(date?: Date | null) {
         hasOvertime: gameHasOvertime,
         startGrid: tempGrid
     }
+
+    console.log(gameSeed);
 
     const gameStartState: GameState = {
         state: 'playing',
