@@ -1,22 +1,26 @@
-import type { Card } from "../types";
+import type { Card, CardType } from "../types";
 
-export function createGrid(cardArray: Card[]): Card[] {
+export function createGrid(cards: Set<Card>, typeOfCards: CardType): Card[] {
     const grid: Card[] = [];
 
-    cardArray.forEach((c, i) => {
+    let i = 1;
+    cards.forEach((c) => {
         const pairId = i + 1;
 
         const first: Card = { 
             ...c, 
-            id: `${pairId}-a` 
+            id: `${pairId}-a`,
+            type: typeOfCards
         };
 
         const second: Card = { 
             ...c,
-            id: `${pairId}-b` 
+            id: `${pairId}-b`,
+            type: typeOfCards
         };
 
         grid.push(first, second);
+        i++;
     });
 
     return grid;

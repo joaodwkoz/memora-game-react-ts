@@ -16,13 +16,32 @@ export function useDailySeed(date?: Date | null) {
     }
 
     const randomTypeOfCards = generateRandomNumber(TYPE_OF_CARDS.length);
-    const gameTypeOfCards = 'fruits' // TYPE_OF_CARDS[randomTypeOfCards];
+    const gameTypeOfCards = TYPE_OF_CARDS[randomTypeOfCards];
 
     const randomNumberOfCards = generateRandomNumber(NUMBER_OF_CARDS.length);
     const gameNumberOfCards = NUMBER_OF_CARDS[randomNumberOfCards];
 
-    const gameIndividualCards = CARDS[gameTypeOfCards].slice(0, gameNumberOfCards / 2);
-    const gameCards = createGrid(gameIndividualCards);
+    const gameIndividualCards: Set<Card> = new Set<Card>();
+
+    while(gameIndividualCards.size < gameNumberOfCards / 2) {
+        let gameType = gameTypeOfCards;
+
+        if (gameTypeOfCards === "mixed") {
+            const randomTypeOfCard = generateRandomNumber(TYPE_OF_CARDS.length - 1);
+            gameType = TYPE_OF_CARDS[randomTypeOfCard];   
+        }
+
+        const gameCards = CARDS[gameType];
+        let randomGeneratedCardIdx = generateRandomNumber(gameCards.length);
+
+        while(gameIndividualCards.has(gameCards[randomGeneratedCardIdx])) {
+            randomGeneratedCardIdx = generateRandomNumber(CARDS[gameType].length);
+        }
+
+        gameIndividualCards.add(gameCards[randomGeneratedCardIdx]);
+    }
+
+    const gameCards = createGrid(gameIndividualCards, gameTypeOfCards);
 
     const generatedMaxNumberOfMoves = MAX_NUMBER_OF_MOVES[gameNumberOfCards];
     const randomMaxNumberOfMoves = generateRandomNumber(generatedMaxNumberOfMoves.length);
