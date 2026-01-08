@@ -2,6 +2,7 @@ import type { ComponentType, SVGProps } from 'react';
 import type { Card } from '../types/index';
 import { BearIcon, CatIcon, ChickenIcon, DogIcon, FishIcon, FoxIcon, GiraffeIcon, HorseIcon, LionIcon, MonkeyIcon, ParrotIcon, PigIcon, RabbitIcon, SharkIcon, WolfIcon } from '../components/icons/animals';
 import { AppleIcon, BananaIcon, CherryIcon, GrapeIcon, LimonIcon, MangoIcon, MelonIcon, OrangeIcon, PeachIcon, PearIcon, PineappleIcon, PlumIcon, RaspberryIcon, StrawberryIcon, WatermelonIcon } from '../components/icons/fruits';
+import { BedIcon, BlanketIcon, BookIcon, ChairIcon, CouchIcon, CupIcon, ForkIcon, KnifeIcon, NotebookIcon, PenIcon, PillowIcon, PlateIcon, PotIcon, SpoonIcon, TableIcon } from '../components/icons/objects';
 
 type GameItem = {
     name: string;
@@ -137,63 +138,63 @@ const FRUITS: GameItem[] = [
 const OBJECTS: GameItem[] = [
     {
         name: "Faca",
-        svg: null,
+        svg: KnifeIcon,
     },
     {
         name: "Garfo",
-        svg: null,
+        svg: ForkIcon,
     },
     {
         name: "Colher",
-        svg: null,
+        svg: SpoonIcon,
     },
     {
         name: "Prato",
-        svg: null,
+        svg: PlateIcon,
     },
     {
         name: "Copo",
-        svg: null,
+        svg: CupIcon,
     },
     {
         name: "Panela",
-        svg: null,
+        svg: PotIcon,
     },
     {
         name: "Mesa",
-        svg: null,
+        svg: TableIcon,
     },
     {
         name: "Cadeira",
-        svg: null,
+        svg: ChairIcon,
     },
     {
         name: "Sofá",
-        svg: null,
+        svg: CouchIcon,
     },
     {
         name: "Cama",
-        svg: null,
+        svg: BedIcon,
     },
     {
         name: "Travesseiro",
-        svg: null,
+        svg: PillowIcon,
     },
     {
         name: "Cobertor",
-        svg: null,
+        svg: BlanketIcon,
     },
     {
         name: "Livro",
-        svg: null,
+        svg: BookIcon,
     },
     {
         name: "Caderno",
-        svg: null,
+        svg: NotebookIcon,
     },
     {
         name: "Caneta",
-        svg: null,
+        svg: PenIcon,
     },
 ];
 
@@ -206,9 +207,9 @@ const MIXED = [
 export const CARDS: Record<string, Card[]> = {
     'animals': 
         ANIMALS.map(
-            (anim) => {
+            (anim, i) => {
                 return { 
-                    id: 1,
+                    id: `${i + 1}-a`,
                     type: 'animals',
                     name: anim.name,
                     svg: anim.svg,
@@ -218,9 +219,9 @@ export const CARDS: Record<string, Card[]> = {
         ),
     'fruits': 
         FRUITS.map(
-            (fru) => {
+            (fru, i) => {
                 return { 
-                    id: 1,
+                    id: `${i + 1}-a`,
                     type: 'fruits',
                     name: fru.name,
                     svg: fru.svg,
@@ -230,24 +231,12 @@ export const CARDS: Record<string, Card[]> = {
         ),
     'objects':
         OBJECTS.map(
-            (obj) => {
+            (obj, i) => {
                 return { 
-                    id: 1,
+                    id: `${i + 1}-a`,
                     type: 'objects',
                     name: obj.name,
                     svg: obj.svg,
-                    state: 'hidden',
-                }
-            } 
-        ),
-    'mixed': 
-        MIXED.map(
-            (mix) => {
-                return { 
-                    id: 1,
-                    type: 'mixed',
-                    name: mix.name,
-                    svg: mix.svg,
                     state: 'hidden',
                 }
             } 
