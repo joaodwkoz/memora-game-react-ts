@@ -21,17 +21,17 @@ export function processTurn(gameState: GameState): GameState {
             ...card,
             state: isInCorrectGuess || wasShownPreviously ? 'shown' : 'hidden'
         };
-    })
+    });
 
-    newState.guesses.push(newGuess);
+    newState.guesses = newState.guesses + (newState.isInOvertime ? 2 : 1);
 
     if (newGuess.isCorrect) {
-        newState.correctGuesses.push(newGuess);
+        newState.correctGuesses++;
     }
 
-    if (newState.guesses.length >= newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
+    if (newState.guesses >= newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
         newState.state = 'lost';
-    } else if (newState.correctGuesses.length >= newState.seed.numberOfCards / 2) {
+    } else if (newState.correctGuesses >= newState.seed.numberOfCards / 2) {
         newState.state = 'won';
     } else {
         newState.state = 'playing';

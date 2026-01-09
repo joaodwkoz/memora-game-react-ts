@@ -36,8 +36,9 @@ export type Guess = {
 export type GameState = {
     state: 'playing' | 'won' | 'lost' | 'guessing',
     seed: Seed,
+    isInOvertime: boolean,
     currentGrid: Card[],
-    guesses: Guess[],
-    correctGuesses: Guess[],
+    guesses: number,
+    correctGuesses: number,
     currentMatch: Match,
 } 
