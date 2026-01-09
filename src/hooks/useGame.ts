@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import type { Card, GameState } from "../types";
-import { useDailySeed } from "./useDailySeed";
 import { processTurn, isValidMove } from "../core/engine";
+import { useDailySeed } from "./useDailySeed";
 
 export function useGame(date?: Date | null) {
     const {
@@ -11,13 +11,7 @@ export function useGame(date?: Date | null) {
     const [gameState, setGameState] = useState<GameState>(gameStartState);
 
     const handleCardClick = (card: Card): void => {
-        if (!isValidMove(gameState)) {
-            return;
-        }
-
-        const isOnCurrentMatch = Object.values(gameState.currentMatch).find((c) => c?.id === card.id);
-
-        if (isOnCurrentMatch || card.state === 'shown') {
+        if (!isValidMove(gameState) || card.state === 'shown') {
             return;
         }
 
@@ -55,8 +49,31 @@ export function useGame(date?: Date | null) {
         }
     }
 
+    const handleGameOver = useCallback((): void => {
+        setGameState(prev => {
+            return {
+                ...prev,
+                isInOvertime: false,
+                state: 'lost',
+            }
+        });
+    }, []);
+
+    const handleOvertimeStart = useCallback((): void => {
+        setGameState(prev => {
+            return {
+                ...prev,
+                isInOvertime: true,
+            }
+        });
+
+        console.log('game em overtime');
+    }, []);
+
     return {
         gameState,
-        handleCardClick
+        handleCardClick,
+        handleGameOver,
+        handleOvertimeStart,
     }
 }
