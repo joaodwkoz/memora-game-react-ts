@@ -55,10 +55,10 @@ export function useDailySeed(date?: Date | null) {
 
     if (gameMaxNumberOfMoves.value !== -1 || gameMaxTime.value !== -1) {
         const randomHasOvertime = generateRandomNumber(20);
-        gameHasOvertime = randomHasOvertime > 17;
+        gameHasOvertime = randomHasOvertime > 12;
     }
 
-    const difficultyPoints = gameMaxNumberOfMoves.score + gameMaxTime.score + (gameHasOvertime ? 5: 0);
+    const difficultyPoints = gameMaxNumberOfMoves.score + gameMaxTime.score + (gameHasOvertime ? 10: 0);
 
     const gameDifficulty = DIFFICULTY_BY_SCORE(difficultyPoints);
 
@@ -84,14 +84,13 @@ export function useDailySeed(date?: Date | null) {
         startGrid: tempGrid
     }
 
-    console.log(gameSeed);
-
     const gameStartState: GameState = {
         state: 'playing',
         seed: gameSeed,
+        isInOvertime: false,
         currentGrid: tempGrid,
-        guesses: [],
-        correctGuesses: [],
+        guesses: 0,
+        correctGuesses: 0,
         currentMatch: {
             card1: null,
             card2: null,
