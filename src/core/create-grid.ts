@@ -3,7 +3,7 @@ import type { Card, CardType } from "../types";
 export function createGrid(cards: Set<Card>, typeOfCards: CardType): Card[] {
     const grid: Card[] = [];
 
-    let i = 1;
+    let i: number = 1;
     cards.forEach((c) => {
         const pairId = i + 1;
 

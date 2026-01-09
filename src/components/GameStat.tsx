@@ -16,7 +16,7 @@ export function GameStat({ icon, value = 0, maxValue, onReachMaxValue }: GameSta
     }, [value]);
 
     return (
-        <div className="flex gap-3 items-center">
+        <div className="flex h-6 gap-3 items-center">
             {icon}
 
             <div className="relative h-6 overflow-hidden flex justify-center">
