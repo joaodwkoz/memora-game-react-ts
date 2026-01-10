@@ -6,7 +6,8 @@ import { KnifeIcon } from "./icons/objects";
 import { AppleIcon } from "./icons/fruits";
 
 interface MemoryCardProps extends Card {
-  onClick?: () => void,
+    isInOvertime?: boolean | null,
+    onClick?: () => void,
 }
 
 const MixedIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -34,7 +35,8 @@ export const MemoryCard = (
             name, 
             svg,
             type,
-            state, 
+            state,
+            isInOvertime,
             onClick 
         }: MemoryCardProps
     ) => {
@@ -46,6 +48,38 @@ export const MemoryCard = (
 
         const FaceIcon = typesFaceSvg[type];
 
+        const frontStyle = {
+            'overtime': {
+                borderColor: isHovered ? '#F28888' : '#C38282',
+                color: isHovered ? '#F28888' : '#C38282',
+            },
+            'normal': {
+                borderColor: isHovered ? '#77A4E8' : '#6886B2',
+                color: isHovered ? '#77A4E8' : '#B8D4FF',
+            },
+            default: {
+                borderColor: isHovered ? '#77A4E8' : '#6886B2',
+                color: isHovered ? '#77A4E8' : '#B8D4FF',
+            },
+        }
+
+        const faceStyle = {
+            'overtime': {
+                borderColor: '#F28888',
+                backgroundColor: '#F28888',
+            },
+            'normal': {
+                borderColor: '#77A4E8',
+                backgroundColor: '#77A4E8',
+            },
+            default: {
+                borderColor: '#77A4E8',
+                backgroundColor: '#77A4E8',
+            },
+        } 
+
+        const styleState = isInOvertime ? 'overtime' : 'normal';
+        
         return (
             <div className="w-24 h-32 perspective-1000" onClick={onClick}>
                 <motion.div
@@ -64,21 +98,21 @@ export const MemoryCard = (
                     <motion.div 
                         animate={{
                             y: isHovered ? -6 : 0,
-                            borderColor: isHovered ? '#77A4E8' : '#6886B2',
+                            borderColor: frontStyle[styleState].borderColor,
                             transition: { duration: 0.1 }
                         }}
                         className="absolute inset-0 rounded-2xl color-card border-3 flex items-center justify-center backface-hidden p-3"
                     >
                         <motion.div 
                             animate={{
-                                borderColor: isHovered ? '#77A4E8' : '#6886B2',
+                                borderColor: frontStyle[styleState].borderColor,
                                 transition: { duration: 0.1 }
                             }}
                             className="w-full h-full rounded-lg border-3 flex items-center justify-center"
                         >
                             <motion.div
                                 animate={{
-                                    color: isHovered ? '#77A4E8' : '#B8D4FF',
+                                    color: frontStyle[styleState].color,
                                     transition: { duration: 0.1 }
                                 }}
                                 className="w-10 h-10"
@@ -91,15 +125,27 @@ export const MemoryCard = (
                         </motion.div>
                     </motion.div>
 
-                    <div className="absolute inset-0 rounded-2xl color-card border-3 border-border flex items-center justify-center rotate-y-180 backface-hidden p-3">
+                    <motion.div 
+                        animate={{
+                            borderColor: faceStyle[styleState].borderColor,
+                            transition: { duration: 0.2 }
+                        }}
+                        className="absolute inset-0 rounded-2xl color-card border-3 flex items-center justify-center rotate-y-180 backface-hidden p-3"
+                    >
                         <div className="h-full w-full">
-                            <div className="aspect-square w-full rounded-md bg-primary flex items-center p-4">
+                            <motion.div
+                                animate={{
+                                    backgroundColor: faceStyle[styleState].backgroundColor,
+                                    transition: { duration: 0.2 }
+                                }}
+                                className="aspect-square w-full rounded-md flex items-center p-4"
+                            >
                                 {
                                     Icon && (
                                         <Icon className="w-full h-full text-white" />
                                     )
                                 }
-                            </div>
+                            </motion.div>
 
                             <div className="h-10 flex items-center justify-center">
                                 <p className="font-medium text-xs leading-snug text-white truncate">
@@ -107,7 +153,7 @@ export const MemoryCard = (
                                 </p>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </motion.div>
             </div>
         );
