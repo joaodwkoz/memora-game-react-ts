@@ -31,8 +31,10 @@ export function processTurn(gameState: GameState): GameState {
 
     if (newState.guesses >= newState.seed.maxNumberOfMoves && newState.seed.maxNumberOfMoves !== -1) {
         newState.state = 'lost';
+        newState.isInOvertime = false;
     } else if (newState.correctGuesses >= newState.seed.numberOfCards / 2) {
         newState.state = 'won';
+        newState.isInOvertime = false;
     } else {
         newState.state = 'playing';
     }
