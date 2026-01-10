@@ -158,7 +158,7 @@ export function Game() {
                                                 className="h-full bg-surface-interactive flex gap-1 p-2 items-center justify-center rounded-lg"
                                             >
                                                 <svg 
-                                                    className="h-8 w-8 text-[#EF5757] shrink-0" 
+                                                    className="h-8 w-8 text-[#F35252] shrink-0" 
                                                     xmlns="http://www.w3.org/2000/svg" 
                                                     width="24" 
                                                     height="24" 
@@ -167,10 +167,10 @@ export function Game() {
                                                     <path fill="currentColor" d="M17 3.34a10 10 0 1 1-14.995 8.984L2 12l.005-.324A10 10 0 0 1 17 3.34M12 6a1 1 0 0 0-.993.883L11 7v5l.009.131a1 1 0 0 0 .197.477l.087.1l3 3l.094.082a1 1 0 0 0 1.226 0l.094-.083l.083-.094a1 1 0 0 0 0-1.226l-.083-.094L13 11.585V7l-.007-.117A1 1 0 0 0 12 6"/>
                                                 </svg>
 
-                                                <p className="font-semibold text-2xl tracking-tight text-[#EF5757] leading-none">2</p>
+                                                <p className="font-semibold text-2xl tracking-tight text-[#F35252] leading-none">2</p>
 
                                                 <svg 
-                                                    className="h-6 w-6 text-[#EF5757]" 
+                                                    className="h-6 w-6 text-[#F35252]" 
                                                     xmlns="http://www.w3.org/2000/svg" 
                                                     width="24" 
                                                     height="24" 
@@ -206,7 +206,7 @@ export function Game() {
                                                 className="h-full bg-surface-interactive flex gap-1 p-2 items-center justify-center rounded-lg"
                                             >
                                                 <svg 
-                                                    className="w-8 h-8 text-[#EF5757]" 
+                                                    className="w-8 h-8 text-[#F35252]" 
                                                     xmlns="http://www.w3.org/2000/svg" 
                                                     width="24" 
                                                     height="24" 
@@ -215,10 +215,10 @@ export function Game() {
                                                     <path fill="currentColor" d="m11.774 15l1.176 1.176a1 1 0 0 1-1.414 1.414l-2.829-2.828a1 1 0 0 1 0-1.414l2.829-2.829a1 1 0 0 1 1.414 1.415L11.883 13H14a4 4 0 1 0 0-8a1 1 0 0 1 0-2a6 6 0 1 1 0 12zM8.273 3L7.176 1.904A1 1 0 0 1 8.591.489l2.828 2.829a1 1 0 0 1 0 1.414L8.591 7.56a1 1 0 0 1-1.415-1.414L8.323 5H6a4 4 0 1 0 0 8a1 1 0 0 1 0 2A6 6 0 1 1 6 3z"/>
                                                 </svg>
 
-                                                <p className="font-semibold text-2xl tracking-tight text-[#EF5757] leading-none">2</p>
+                                                <p className="font-semibold text-2xl tracking-tight text-[#F35252] leading-none">2</p>
 
                                                 <svg 
-                                                    className="h-6 w-6 text-[#EF5757]" 
+                                                    className="h-6 w-6 text-[#F35252]" 
                                                     xmlns="http://www.w3.org/2000/svg" 
                                                     width="24" 
                                                     height="24" 
@@ -241,10 +241,11 @@ export function Game() {
                                     (card, i) => (
                                         <MemoryCard 
                                             key={i.toString()} 
+                                            {...card}
+                                            isInOvertime={gameState.isInOvertime}
                                             onClick={
                                                 () => handleCardClick(card)
                                             } 
-                                            {...card} 
                                         />
                                     )
                                 )
