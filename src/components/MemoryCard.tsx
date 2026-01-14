@@ -29,133 +29,131 @@ const typesFaceSvg = {
     mixed: MixedIcon,
 } as const;
 
-export const MemoryCard = (
-    (
-        { 
-            name, 
-            svg,
-            type,
-            state,
-            isInOvertime,
-            onClick 
-        }: MemoryCardProps
-    ) => {
-        const [isHovered, setIsHovered] = useState<boolean>(false);
+export function MemoryCard (
+    { 
+        name, 
+        svg,
+        type,
+        state,
+        isInOvertime,
+        onClick 
+    }: MemoryCardProps
+) {
+    const [isHovered, setIsHovered] = useState<boolean>(false);
 
-        const isShown = state === "shown";
+    const isShown = state === "shown";
 
-        const Icon = svg;
+    const Icon = svg;
 
-        const FaceIcon = typesFaceSvg[type];
+    const FaceIcon = typesFaceSvg[type];
 
-        const frontStyle = {
-            'overtime': {
-                borderColor: isHovered ? '#F28888' : '#C38282',
-                color: isHovered ? '#F28888' : '#C38282',
-            },
-            'normal': {
-                borderColor: isHovered ? '#77A4E8' : '#6886B2',
-                color: isHovered ? '#77A4E8' : '#B8D4FF',
-            },
-            default: {
-                borderColor: isHovered ? '#77A4E8' : '#6886B2',
-                color: isHovered ? '#77A4E8' : '#B8D4FF',
-            },
-        }
+    const frontStyle = {
+        'overtime': {
+            borderColor: isHovered ? '#F28888' : '#C38282',
+            color: isHovered ? '#F28888' : '#C38282',
+        },
+        'normal': {
+            borderColor: isHovered ? '#77A4E8' : '#6886B2',
+            color: isHovered ? '#77A4E8' : '#B8D4FF',
+        },
+        default: {
+            borderColor: isHovered ? '#77A4E8' : '#6886B2',
+            color: isHovered ? '#77A4E8' : '#B8D4FF',
+        },
+    }
 
-        const faceStyle = {
-            'overtime': {
-                borderColor: '#F28888',
-                backgroundColor: '#F28888',
-            },
-            'normal': {
-                borderColor: '#77A4E8',
-                backgroundColor: '#77A4E8',
-            },
-            default: {
-                borderColor: '#77A4E8',
-                backgroundColor: '#77A4E8',
-            },
-        } 
+    const faceStyle = {
+        'overtime': {
+            borderColor: '#F28888',
+            backgroundColor: '#F28888',
+        },
+        'normal': {
+            borderColor: '#77A4E8',
+            backgroundColor: '#77A4E8',
+        },
+        default: {
+            borderColor: '#77A4E8',
+            backgroundColor: '#77A4E8',
+        },
+    } 
 
-        const styleState = isInOvertime ? 'overtime' : 'normal';
-        
-        return (
-            <div className="w-24 h-32 perspective-1000" onClick={onClick}>
-                <motion.div
+    const styleState = isInOvertime ? 'overtime' : 'normal';
+    
+    return (
+        <div className="w-24 h-32 perspective-1000" onClick={onClick}>
+            <motion.div
+                animate={{
+                    rotateY: isShown ? 180 : 0,
+                    transition: { duration: 0.375 }
+                }}
+                className="cursor-pointer relative w-full h-full rounded-2xl transform-style-preserve-3d"
+                onMouseEnter={
+                    () => setIsHovered(true)
+                }
+                onMouseLeave={
+                    () => setIsHovered(false)
+                }
+            >
+                <motion.div 
                     animate={{
-                        rotateY: isShown ? 180 : 0,
-                        transition: { duration: 0.375 }
+                        y: isHovered ? -6 : 0,
+                        borderColor: frontStyle[styleState].borderColor,
+                        transition: { duration: 0.1 }
                     }}
-                    className="cursor-pointer relative w-full h-full rounded-2xl transform-style-preserve-3d"
-                    onMouseEnter={
-                        () => setIsHovered(true)
-                    }
-                    onMouseLeave={
-                        () => setIsHovered(false)
-                    }
+                    className="absolute inset-0 rounded-2xl color-card border-3 flex items-center justify-center backface-hidden p-3"
                 >
                     <motion.div 
                         animate={{
-                            y: isHovered ? -6 : 0,
                             borderColor: frontStyle[styleState].borderColor,
                             transition: { duration: 0.1 }
                         }}
-                        className="absolute inset-0 rounded-2xl color-card border-3 flex items-center justify-center backface-hidden p-3"
+                        className="w-full h-full rounded-lg border-3 flex items-center justify-center"
                     >
-                        <motion.div 
+                        <motion.div
                             animate={{
-                                borderColor: frontStyle[styleState].borderColor,
+                                color: frontStyle[styleState].color,
                                 transition: { duration: 0.1 }
                             }}
-                            className="w-full h-full rounded-lg border-3 flex items-center justify-center"
+                            className="w-10 h-10"
                         >
-                            <motion.div
-                                animate={{
-                                    color: frontStyle[styleState].color,
-                                    transition: { duration: 0.1 }
-                                }}
-                                className="w-10 h-10"
-                            >
-                                <FaceIcon
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-full h-full" 
-                                />
-                            </motion.div>
+                            <FaceIcon
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="w-full h-full" 
+                            />
                         </motion.div>
                     </motion.div>
-
-                    <motion.div 
-                        animate={{
-                            borderColor: faceStyle[styleState].borderColor,
-                            transition: { duration: 0.2 }
-                        }}
-                        className="absolute inset-0 rounded-2xl color-card border-3 flex items-center justify-center rotate-y-180 backface-hidden p-3"
-                    >
-                        <div className="h-full w-full">
-                            <motion.div
-                                animate={{
-                                    backgroundColor: faceStyle[styleState].backgroundColor,
-                                    transition: { duration: 0.2 }
-                                }}
-                                className="aspect-square w-full rounded-md flex items-center p-4"
-                            >
-                                {
-                                    Icon && (
-                                        <Icon className="w-full h-full text-white" />
-                                    )
-                                }
-                            </motion.div>
-
-                            <div className="h-10 flex items-center justify-center">
-                                <p className="font-medium text-xs leading-snug text-white truncate">
-                                    { name }
-                                </p>
-                            </div>
-                        </div>
-                    </motion.div>
                 </motion.div>
-            </div>
-        );
-    }
-);
+
+                <motion.div 
+                    animate={{
+                        borderColor: faceStyle[styleState].borderColor,
+                        transition: { duration: 0.2 }
+                    }}
+                    className="absolute inset-0 rounded-2xl color-card border-3 flex items-center justify-center rotate-y-180 backface-hidden p-3"
+                >
+                    <div className="h-full w-full">
+                        <motion.div
+                            animate={{
+                                backgroundColor: faceStyle[styleState].backgroundColor,
+                                transition: { duration: 0.2 }
+                            }}
+                            className="aspect-square w-full rounded-md flex items-center p-4"
+                        >
+                            {
+                                Icon && (
+                                    <Icon className="w-full h-full text-white" />
+                                )
+                            }
+                        </motion.div>
+
+                        <div className="h-10 flex items-center justify-center">
+                            <p className="font-medium text-xs leading-snug text-white truncate">
+                                { name }
+                            </p>
+                        </div>
+                    </div>
+                </motion.div>
+            </motion.div>
+        </div>
+    );
+}
