@@ -54,7 +54,7 @@ export function TooltipContent({ children }: TooltipContentProps) {
                         top: coords.top, 
                         left: coords.left 
                     }}
-                    className="fixed -translate-x-1/2 -translate-y-full px-3 py-1 bg-surface-interactive text-white text-sm rounded border border-white/5 max-w-96 z-[9999]"
+                    className="fixed -translate-x-1/2 -translate-y-full px-3 py-1 bg-surface-interactive text-white text-sm rounded border border-white/5 max-w-96 z-9999"
                 >
                     <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-interactive border-b border-r border-white/5 rotate-45" />
 
